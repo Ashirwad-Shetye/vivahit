@@ -21,12 +21,12 @@ function App() {
             <IoNotificationsOutline />
           </button>
         </div>
-        <div className="grid grid-rows-2 gap-4">
-          <div className="grid grid-cols-2 gap-4 px-4">
+        <div className="grid grid-rows-2 gap-4 px-4 pb-4 h-5/6">
+          <div className="grid grid-cols-2 gap-4">
             <Weather />
             <AQI />
           </div>
-          <div className="grid grid-cols-12 gap-4 px-4">
+          <div className="grid grid-cols-12 gap-4">
             <Today />
             <Tomorrow />
           </div>
