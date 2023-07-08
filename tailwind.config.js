@@ -12,6 +12,8 @@ export default {
       },
       fontFamily: {
         Monsterrat: "Montserrat, sans-serif",
+        Figtree: "Figtree, sans-serif",
+        Urbanist: "Urbanist, sans-serif",
       },
     },
   },

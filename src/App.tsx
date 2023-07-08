@@ -9,7 +9,7 @@ import { IoNotificationsOutline } from "react-icons/io5";
 
 function App() {
   return (
-    <main className="flex font-Monsterrat">
+    <main className="flex font-Figtree tracking-wide">
       <Nav />
       <section className="flex-1">
         <div className="h-24 flex items-center justify-end">
