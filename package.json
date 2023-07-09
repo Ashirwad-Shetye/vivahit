@@ -17,7 +17,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-select-async-paginate": "^0.7.3",
-    "tailwind-merge": "^1.13.2"
+    "tailwind-merge": "^1.13.2",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/node": "^20.4.1",

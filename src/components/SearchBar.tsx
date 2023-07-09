@@ -4,8 +4,9 @@ import { GEO_API_URL, geoApiOptions } from "../api/constants";
 import { AsyncPaginate, LoadOptions } from "react-select-async-paginate";
 import { GroupBase } from "react-select";
 import { City } from "../lib/types";
+import { useWeatherStore, useLocationStore } from "../service/store";
 
-// Custom styles
+// Custom styles for react select async paginate
 const customStyles = {
   control: (provided: any, state: any) => ({
     ...provided,
@@ -21,6 +22,11 @@ const customStyles = {
 };
 
 function SearchBar() {
+  const weatherData = useWeatherStore((state) => state.searchData);
+  const updateWeather = useWeatherStore((state) => state.updateWeatherData);
+  const locationData = useLocationStore((state) => state.location);
+  const updatelocation = useLocationStore((state) => state.updateLocation);
+
   const [searchValue, setSearchValue] = useState("");
 
   const loadOptions: LoadOptions<string, GroupBase<string>, unknown> = async (
@@ -36,7 +42,6 @@ function SearchBar() {
         value: `${city.latitude} ${city.longitude}`,
         label: `${city.name} ${city.countryCode}`,
       }));
-
       return { options };
     } catch (error) {
       console.error("Error loading options:", error);
@@ -46,10 +51,12 @@ function SearchBar() {
 
   const handleSearchOnchange = (searchData: any) => {
     setSearchValue(searchData);
-    console.log(searchData);
+    updatelocation(searchValue);
   };
 
-  const handleSearchOnClick = () => {};
+  const handleSearchOnClick = () => {
+    console.log(locationData);
+  };
 
   return (
     <div className="flex items-center mx-5 bg-accentGrey pl-3 py-1 rounded-lg">
