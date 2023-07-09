@@ -5,6 +5,21 @@ import { AsyncPaginate, LoadOptions } from "react-select-async-paginate";
 import { GroupBase } from "react-select";
 import { City } from "../lib/types";
 
+// Custom styles
+const customStyles = {
+  control: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: "transparent",
+    border: "0px",
+    boxShadow: state.isFocused ? "0 0 0 0px transparent" : null,
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#f97f29" : null,
+    color: state.isFocused ? "white" : null,
+  }),
+};
+
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
 
@@ -37,7 +52,7 @@ function SearchBar() {
   const handleSearchOnClick = () => {};
 
   return (
-    <div className="flex items-center mx-5 bg-accentGrey pl-5 py-3 rounded-lg">
+    <div className="flex items-center mx-5 bg-accentGrey pl-3 py-1 rounded-lg">
       <AsyncPaginate
         value={searchValue}
         debounceTimeout={600}
@@ -45,6 +60,7 @@ function SearchBar() {
         loadOptions={loadOptions}
         placeholder="Search city ..."
         onChange={handleSearchOnchange}
+        styles={customStyles}
         className="bg-transparent w-64 focus:outline-none text-accentSecondary focus:ring-0 placeholder:text-fontBlue text-sm font-semibold tracking-wide"
       />
       <button
