@@ -23,3 +23,8 @@ export type WeatherLocation = {
   value: string,
   name: string
 };
+
+export type LatLon = {
+  lat: string,
+  lon: string
+}

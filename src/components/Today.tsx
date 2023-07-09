@@ -1,7 +1,7 @@
 import { Button } from "./ui/Button";
 import { BsWind, BsThermometerHalf, BsUmbrella } from "react-icons/bs";
 
-function Today() {
+function Today({ currentWeather }: any) {
   return (
     <div className="md:col-span-8 min-h-[4rem] h-72 max-h-[20rem] text-accentSecondary rounded-2xl">
       <div className="p-8">

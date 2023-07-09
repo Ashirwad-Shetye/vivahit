@@ -12,4 +12,4 @@ export const OW_API_URL = import.meta.env.VITE_OW_API_URL
 
 export const OW_KEY = import.meta.env.VITE_OW_API_KEY
 
-export const AQI_KEY = import.meta.env.VITE_AQI_API_KEY
+export const AQI_URL = import.meta.env.VITE_AQI_API_URL

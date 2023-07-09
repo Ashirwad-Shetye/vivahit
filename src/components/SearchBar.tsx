@@ -22,7 +22,7 @@ const customStyles = {
   }),
 };
 
-function SearchBar() {
+function SearchBar({ handleOnSearchClick }: any) {
   const weatherData = useWeatherStore((state) => state.weatherData);
   const updateWeather = useWeatherStore((state) => state.updateWeatherData);
   const locationData = useLocationStore((state) => state.location);
@@ -54,11 +54,8 @@ function SearchBar() {
     updatelocation(searchValue);
   };
 
-  const handleSearchOnClick = () => {
-    console.log(locationData);
-    if (locationData) {
-      console.log(fetchCurrentWeatherData(locationData));
-    }
+  const handleClick = () => {
+    handleOnSearchClick(searchValue);
   };
 
   return (
@@ -74,7 +71,7 @@ function SearchBar() {
         className="bg-transparent w-64 focus:outline-none text-accentSecondary focus:ring-0 placeholder:text-fontBlue text-sm font-semibold tracking-wide"
       />
       <button
-        onClick={handleSearchOnClick}
+        onClick={handleClick}
         className="text-xl px-5 text-accentPrimary hover:scale-110 duration-200"
       >
         <LuSearch />
