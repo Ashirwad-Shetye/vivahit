@@ -3,7 +3,7 @@ import { BsWind, BsThermometerHalf, BsUmbrella } from "react-icons/bs";
 
 function Today() {
   return (
-    <div className=" bg-slate-300 col-span-8 text-accentSecondary rounded-2xl">
+    <div className="md:col-span-8 min-h-[4rem] h-72 max-h-[20rem] text-accentSecondary rounded-2xl">
       <div className="p-8">
         <div className="flex justify-between">
           <h1 className="text-2xl font-semibold">
