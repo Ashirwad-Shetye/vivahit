@@ -12,7 +12,7 @@ function App() {
     <main className="flex-col md:flex-row flex font-Figtree tracking-wide">
       <Nav />
       <section className="flex-1 mx-auto max-h-screen">
-        <div className="h-24 flex items-center justify-between md:justify-end">
+        <div className="h-28 flex items-center justify-between md:justify-end">
           <SearchBar />
           <button
             className="border-2 text-xl rounded-full px-2.5 py-2.5 mr-4 text-fontBlue hover:bg-accentPrimary/80 hover:text-white 
