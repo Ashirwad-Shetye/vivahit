@@ -3,13 +3,12 @@ import { WeatherData, LocationData } from "../lib/types";
 
 
 export const useWeatherStore = create<WeatherData>()((set) => ({
-  searchData: null,
-  
-  updateWeatherData: (data: WeatherData) => set({ searchData: data }),
+  weatherData: null,
+  updateWeatherData: (data: WeatherData | null) => set({ weatherData: data }),
 }))
 
 export const useLocationStore = create<LocationData>()((set) => ({
     location: null,
-  updateLocation: (data: LocationData) => set({ location: data }),
+  updateLocation: (data: LocationData | null) => set({ location: data }),
 }))
 

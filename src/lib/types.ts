@@ -11,10 +11,15 @@ export interface CityResponse {
 
 export interface WeatherData {
     updateWeatherData: any;
-  searchData: any,
+  weatherData: any,
 }
 
 export interface LocationData {
   location: any,
   updateLocation: any
 }
+
+export type WeatherLocation = {
+  value: string,
+  name: string
+};
