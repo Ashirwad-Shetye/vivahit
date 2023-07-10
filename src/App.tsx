@@ -30,7 +30,6 @@ function App() {
         setLatitude(lat);
         setLongitude(lon);
         const response: any = await fetchWeatherData({ lat, lon });
-        console.log(response);
         setCurrentWeather({ ...response[0] });
         setForecast({ ...response[1] });
         setAqi({ ...response[2] });
@@ -93,7 +92,7 @@ function App() {
           </div>
         </div>
       </section>
-      <Highlights />
+      <Highlights forecast={forecast} currentWeather={currentWeather} />
     </main>
   );
 }

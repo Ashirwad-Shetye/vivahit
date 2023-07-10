@@ -78,3 +78,13 @@ export const character = (str: string): string => {
   const result = mapping[str] || "unknown";
   return result;
 };
+
+export const convertTimestampToTime = (timestamp: number): string => {
+  const date = new Date(timestamp * 1000);
+  const timeString = date.toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
+  return timeString;
+}

@@ -73,8 +73,6 @@ function Today({ forecast }: any) {
     ],
   };
 
-  console.log(icons);
-
   return (
     <div className="md:col-span-8 min-h-[4rem] max-h-[20rem] relative text-accentSecondary rounded-2xl">
       <div className="p-8">

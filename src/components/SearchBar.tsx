@@ -4,7 +4,6 @@ import { GEO_API_URL, geoApiOptions } from "../api/constants";
 import { AsyncPaginate, LoadOptions } from "react-select-async-paginate";
 import { GroupBase } from "react-select";
 import { City } from "../lib/types";
-import { useWeatherStore, useLocationStore } from "../service/store";
 
 // Custom styles for react select async paginate
 const customStyles = {
