@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import Highlights from "./components/Highlights";
 import SearchBar from "./components/SearchBar";
@@ -7,40 +7,50 @@ import Today from "./components/Today";
 import Tomorrow from "./components/Tomorrow";
 import Weather from "./components/Weather";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { OW_API_URL, OW_KEY, AQI_URL } from "./api/constants";
+import { fetchWeatherData } from "./api/apiCalls";
+import { Skeleton, skeletonVariants } from "./components/ui/Skeleton";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState<any | null>(null);
   const [forecast, setForecast] = useState<any | null>(null);
   const [aqi, setAqi] = useState<any | null>(null);
+  const [latitude, setLatitude] = useState<string | null>();
+  const [longitude, setLongitude] = useState<string | null>();
 
-  const handleOnSearchClick = (searchData: any) => {
+  useEffect(() => {
+    const getWeatherData = async () => {
+      try {
+        const position = await new Promise<GeolocationPosition>(
+          (resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+          }
+        );
+        const lat = position.coords.latitude.toString();
+        const lon = position.coords.longitude.toString();
+        setLatitude(lat);
+        setLongitude(lon);
+        const response: any = await fetchWeatherData({ lat, lon });
+        console.log(response);
+        setCurrentWeather({ ...response[0] });
+        setForecast({ ...response[1] });
+        setAqi({ ...response[2] });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getWeatherData();
+  }, [latitude, longitude]);
+
+  const handleOnSearchClick = async (searchData: any) => {
     const [lat, lon] = searchData.value.split(" ");
-
     const city: string = searchData.label;
-
-    const currentWeatherFetch = fetch(
-      `${OW_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${OW_KEY}&units=metric`
-    );
-
-    const forecastFetch = fetch(
-      `${OW_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${OW_KEY}&units=metric`
-    );
-
-    const AQIFetch = fetch(`${AQI_URL}lat=${lat}&lon=${lon}&appid=${OW_KEY}`);
-
-    Promise.all([currentWeatherFetch, forecastFetch, AQIFetch])
-      .then(async (response) => {
-        const weatherResponse = await response[0].json();
-        const forecastResponse = await response[1].json();
-        const AQIResponse = await response[2].json();
-        setCurrentWeather({ city, ...weatherResponse });
-        setForecast({ city, ...forecastResponse });
-        setAqi({ city, ...AQIResponse });
-      })
-      .catch((err: string) => {
-        console.error(err);
-      });
+    const response = await fetchWeatherData({
+      lat,
+      lon,
+    });
+    setCurrentWeather({ city, ...response[0] });
+    setForecast({ city, ...response[1] });
+    setAqi({ city, ...response[2] });
   };
 
   return (
@@ -58,16 +68,32 @@ function App() {
         </div>
         <div className="grid grid-rows-2 gap-4 px-4 pb-4 h-5/6">
           <div className="grid md:grid-cols-2 gap-4">
-            <Weather currentWeather={currentWeather} />
-            <AQI currentWeather={currentWeather} aqi={aqi} />
+            {currentWeather ? (
+              <Weather currentWeather={currentWeather} />
+            ) : (
+              <Skeleton />
+            )}
+            {aqi ? (
+              <AQI currentWeather={currentWeather} aqi={aqi} />
+            ) : (
+              <Skeleton />
+            )}
           </div>
           <div className="grid md:grid-cols-12 gap-4">
-            <Today currentWeather={currentWeather} />
-            <Tomorrow forecast={forecast} />
+            {forecast ? (
+              <Today forecast={forecast} />
+            ) : (
+              <Skeleton className={skeletonVariants({ variant: "today" })} />
+            )}
+            {forecast ? (
+              <Tomorrow forecast={forecast} />
+            ) : (
+              <Skeleton className={skeletonVariants({ variant: "tomorrow" })} />
+            )}
           </div>
         </div>
       </section>
-      <Highlights forecast={forecast} />
+      <Highlights />
     </main>
   );
 }

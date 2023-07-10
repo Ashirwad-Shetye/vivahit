@@ -1,16 +1,30 @@
 import axios from "axios"
 import { WeatherData, LatLon } from "../lib/types";
-import { OW_KEY, OW_API_URL } from "./constants";
+import { OW_KEY, OW_API_URL, AQI_URL } from "./constants";
 
   
-export const fetchCurrentWeatherData = async ({lat,lon}:LatLon): Promise<WeatherData> => {
-    const response = await axios.get(`${OW_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${OW_KEY}&units=metric`);
-    const data = response.data;
-    return data 
-};
+export const fetchWeatherData = async ({ lat, lon }: LatLon) => {
+  const currentWeatherFetch = fetch(
+    `${OW_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${OW_KEY}&units=metric`
+  );
 
-export const fetchForecastData = async ({lat,lon}:LatLon): Promise<WeatherData> => {
-    const response = await axios.get(`${OW_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${OW_KEY}&units=metric`);
-    const data = response.data;
-    return data
+  const forecastFetch = fetch(
+    `${OW_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${OW_KEY}&units=metric`
+  );
+
+  const AQIFetch = fetch(`${AQI_URL}lat=${lat}&lon=${lon}&appid=${OW_KEY}`);
+
+  try {
+    const [currentWeatherResponse, forecastResponse, AQIResponse] =
+      await Promise.all([currentWeatherFetch, forecastFetch, AQIFetch]);
+
+    const weatherResponse = await currentWeatherResponse.json();
+    const forecastData = await forecastResponse.json();
+    const AQIData = await AQIResponse.json();
+
+    return [weatherResponse, forecastData, AQIData];
+  } catch (err) {
+    console.error(err);
+    return [null, null, null];
+  }
 };

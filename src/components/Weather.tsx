@@ -5,7 +5,9 @@ import { mToKm } from "../lib/unitConversion";
 function Weather({ currentWeather }: any) {
   const data = currentWeather;
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-[url('/img/weather-bg/02d.gif')] bg-cover bg-no-repeat text-accentSecondary">
+    <div
+      className={`relative overflow-hidden min-h-[4rem] max-h-[20rem] rounded-2xl bg-[url('/img/weather-bg/09d.gif')] bg-cover bg-no-repeat text-accentSecondary`}
+    >
       <div className="grid grid-rows-3 w-full px-6 h-full py-6">
         <div>
           <div className="flex items-center space-x-4 text-white">

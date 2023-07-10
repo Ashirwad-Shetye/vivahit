@@ -5,7 +5,6 @@ import { AsyncPaginate, LoadOptions } from "react-select-async-paginate";
 import { GroupBase } from "react-select";
 import { City } from "../lib/types";
 import { useWeatherStore, useLocationStore } from "../service/store";
-import { fetchCurrentWeatherData } from "../api/apiCalls";
 
 // Custom styles for react select async paginate
 const customStyles = {
@@ -23,11 +22,6 @@ const customStyles = {
 };
 
 function SearchBar({ handleOnSearchClick }: any) {
-  const weatherData = useWeatherStore((state) => state.weatherData);
-  const updateWeather = useWeatherStore((state) => state.updateWeatherData);
-  const locationData = useLocationStore((state) => state.location);
-  const updatelocation = useLocationStore((state) => state.updateLocation);
-
   const [searchValue, setSearchValue] = useState("");
 
   const loadOptions: LoadOptions<string, GroupBase<string>, unknown> = async (
@@ -51,7 +45,6 @@ function SearchBar({ handleOnSearchClick }: any) {
 
   const handleSearchOnchange = (searchData: any) => {
     setSearchValue(searchData);
-    updatelocation(searchValue);
   };
 
   const handleClick = () => {
