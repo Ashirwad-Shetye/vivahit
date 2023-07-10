@@ -55,7 +55,7 @@ function App() {
   return (
     <main className="flex-col md:flex-row flex font-Figtree tracking-wide">
       <Nav />
-      <section className="flex-1 mx-auto max-h-screen">
+      <section className="md:flex-1 mx-auto md:max-h-screen">
         <div className="h-28 flex items-center justify-between md:justify-end">
           <SearchBar handleOnSearchClick={handleOnSearchClick} />
           <button

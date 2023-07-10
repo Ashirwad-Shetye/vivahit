@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Logo from "../assets/logo/logo.png";
 import { RxDashboard } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLocationPin } from "react-icons/sl";
@@ -14,13 +13,12 @@ function Nav() {
     setIsFocused(isFocused);
   };
   return (
-    <div className="md:w-32 w-full h-24 relative md:h-screen justify-between">
-      <img
-        src={Logo}
-        alt="weather logo"
-        className="w-12 mx-auto py-10 rounded-full"
-      />
-      <div className="hidden mx-auto mt-4 md:h-80 w-fit md:flex flex-col justify-between">
+    <div className="md:w-32 w-full flex md:flex-col h-24 px-10 md:px-0 relative md:h-screen justify-between items-center md:justify-normal">
+      <div className="w-12 h-12 md:mx-auto md:py-10 rounded-xl">
+        <img src="/logo.png" alt="weather logo" className="" />
+      </div>
+      <div className=" md:hidden">Toggle</div>
+      <div className="hidden mx-auto mt-20 md:h-80 w-fit md:flex flex-col justify-between">
         <Button
           className={buttonVariants({ variant: "navFocus" })}
           onClick={handleButtonFocus}

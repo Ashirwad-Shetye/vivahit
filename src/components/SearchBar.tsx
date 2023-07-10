@@ -31,7 +31,7 @@ function SearchBar({ handleOnSearchClick }: any) {
     try {
       const response = await fetch(url, geoApiOptions);
       const responseData = await response.json();
-      const options = responseData.data.map((city: City) => ({
+      const options = responseData?.data.map((city: City) => ({
         value: `${city.latitude} ${city.longitude}`,
         label: `${city.name} ${city.countryCode}`,
       }));

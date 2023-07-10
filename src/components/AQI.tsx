@@ -1,16 +1,17 @@
 import React from "react";
 import { BsWind } from "react-icons/bs";
-import {
-  windDirection,
-  findMainPollution,
-  aqiWidth,
-  aqiQuality,
-} from "../lib/utils";
+import { windDirection, findMainPollution, aqiQuality } from "../lib/utils";
 
 function AQI({ aqi, currentWeather }: any) {
   const data = currentWeather;
+  const styles = {
+    backgroundImage: `url('aqibg/${aqi.list[0].main.aqi}.jpg')`,
+  };
   return (
-    <div className="relative overflow-hidden min-h-[4rem] max-h-[20rem] rounded-2xl bg-blue-200 text-white">
+    <div
+      className={`relative overflow-hidden min-h-[4rem] max-h-[20rem] rounded-2xl bg-cover bg-no-repeat text-white`}
+      style={styles}
+    >
       <div className="grid grid-rows-3 w-full px-6 h-full py-6">
         <div className="">
           <div className="flex items-center space-x-4">
